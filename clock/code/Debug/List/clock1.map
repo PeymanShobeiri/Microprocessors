@@ -1,0 +1,25 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+number                                                                            0x0260      11
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+i                                                                                 R4,R5        2
+hour                                                                              R6,R7        2
+min                                                                               R8,R9        2
+sec                                                                               R10,R11      2
+reverse                                                                           R12,R13      2
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+check                                                                             0x00069     55
+show                                                                              0x000A0     71
+button                                                                            0x000E7     66
+main                                                                              0x00129     53
