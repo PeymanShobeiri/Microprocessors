@@ -1,0 +1,56 @@
+#include <mega32.h>
+
+int sw=0,count=0;
+
+
+
+interrupt [EXT_INT2] void ext_int2_isr(void)
+{
+TCCR0=(0<<WGM00) | (0<<COM01) | (0<<COM00) | (0<<WGM01) | (1<<CS02) | (0<<CS01) | (1<<CS00);
+TCNT0=0x86;
+OCR0=0x00;
+TIMSK=0x01;
+}
+
+interrupt [TIM0_OVF] void timer0_ovf_isr(void)
+{
+TCNT0=0x86;
+count++;
+if (count > 3){
+     PORTC.0=!PORTC.0;
+     count=0;
+     sw++;
+     }
+
+}
+
+void main(void)
+{
+DDRB=0x00;
+DDRC=0x01;
+PORTC.0=0;
+
+GICR|=(0<<INT1) | (0<<INT0) | (1<<INT2);
+MCUCR=(0<<ISC11) | (0<<ISC10) | (0<<ISC01) | (0<<ISC00);
+MCUCSR=(0<<ISC2);
+GIFR=(0<<INTF1) | (0<<INTF0) | (1<<INTF2);
+UCSRB=(0<<RXCIE) | (0<<TXCIE) | (0<<UDRIE) | (0<<RXEN) | (0<<TXEN) | (0<<UCSZ2) | (0<<RXB8) | (0<<TXB8);
+ACSR=(1<<ACD) | (0<<ACBG) | (0<<ACO) | (0<<ACI) | (0<<ACIE) | (0<<ACIC) | (0<<ACIS1) | (0<<ACIS0);
+SFIOR=(0<<ACME);
+ADCSRA=(0<<ADEN) | (0<<ADSC) | (0<<ADATE) | (0<<ADIF) | (0<<ADIE) | (0<<ADPS2) | (0<<ADPS1) | (0<<ADPS0);
+SPCR=(0<<SPIE) | (0<<SPE) | (0<<DORD) | (0<<MSTR) | (0<<CPOL) | (0<<CPHA) | (0<<SPR1) | (0<<SPR0);
+TWCR=(0<<TWEA) | (0<<TWSTA) | (0<<TWSTO) | (0<<TWEN) | (0<<TWIE);
+TIMSK=0x00;
+#asm("sei")
+
+while (1)
+      {
+
+        if (sw>3){
+        sw=0;
+        TIMSK=0x00;
+        }
+      }
+}
+
+

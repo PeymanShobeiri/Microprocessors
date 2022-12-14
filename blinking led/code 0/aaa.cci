@@ -1,0 +1,7 @@
+VERSION:3 SOURCE_TIMESTAMP:543AB92D
+NODE:I LEVEL:0 LINE:1 "C:\cvavr\inc\mega32.h"
+NODE:V LEVEL:0 LINE:3 "sw -> R4,R5"
+NODE:V LEVEL:0 LINE:3 "count -> R6,R7"
+NODE:F LEVEL:0 LINE:7 "ext_int2_isr(void)"
+NODE:F LEVEL:0 LINE:15 "timer0_ovf_isr(void)"
+NODE:F LEVEL:0 LINE:27 "main(void)"
